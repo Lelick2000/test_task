@@ -1,0 +1,76 @@
+{
+  "chrome": {
+    "windows": {
+      "args": [
+        "start-maximized",
+        "no-sandbox",
+        "disable-gpu",
+        "disable-extensions",
+        "disable-web-security",
+        "disable-infobars",
+        "use-fake-device-for-media-stream",
+        "use-fake-ui-for-media-stream",
+        "disable-notifications",
+        "ignore-certificate-errors",
+        "disable-browser-side-navigation",
+        "disable-dev-shm-usage"
+      ],
+      "experimentalOptions": {
+        "excludeSwitches": [
+          "disable-component-update",
+          "disable-popup-blocking"
+        ],
+        "prefs": {
+          "download.prompt_for_download": false,
+          "download.directory_upgrade": true,
+          "safebrowsing.enabled": true,
+          "intl.accept_languages": "ru-ru",
+          "profile.default_content_settings.popups": "0",
+          "disable-popup-blocking": "true",
+          "download.default_directory": ".//target//downloads//"
+        }
+      },
+      "capabilities": {
+        "enableVNC": true,
+        "acceptSslCerts": true,
+        "acceptInsecureCerts": true
+      }
+    },
+    "linux": {
+      "args": [
+        "no-sandbox",
+        "ignore-certificate-errors",
+        "disable-gpu",
+        "disable-infobars",
+        "disable-extensions",
+        "disable-web-security",
+        "disable-notifications",
+        "disable-setuid-sandbox",
+        "disable-browser-side-navigation",
+        "disable-dev-shm-usage",
+        "remote-debugging-port=9222",
+        "window-size=1920,1080"
+      ],
+      "experimentalOptions": {
+        "excludeSwitches": [
+          "disable-component-update",
+          "disable-popup-blocking"
+        ],
+        "prefs": {
+          "download.prompt_for_download": false,
+          "download.directory_upgrade": true,
+          "safebrowsing.enabled": true,
+          "intl.accept_languages": "ru-ru",
+          "profile.default_content_settings.popups": "0",
+          "disable-popup-blocking": "true",
+          "download.default_directory": ".//target//downloads//"
+        }
+      },
+      "capabilities": {
+        "enableVNC": true,
+        "acceptSslCerts": true,
+        "acceptInsecureCerts": true
+      }
+    }
+  }
+}
