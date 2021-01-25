@@ -9,6 +9,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import project.factories.StepsFactory;
+import project.utils.autocloser.PopupsClosingScheduler;
 
 import java.net.MalformedURLException;
 
@@ -19,6 +20,9 @@ import static project.constants.Urls.BASE_URL;
 public abstract class BaseTest {
     protected final Logger logger = Logger.getInstance();
     protected static final StepsFactory stepsFactory = StepsFactory.getFactory();
+
+    // Утилита по закрытию попапов на сайте
+    protected PopupsClosingScheduler popupsClosingScheduler = new PopupsClosingScheduler();
 
     /**
      * To override.
@@ -38,6 +42,7 @@ public abstract class BaseTest {
     protected void openBrowserAndExecuteBasicActions() {
         DriverContainer.setDrivers();
         Selenide.open(BASE_URL.getValue());
+        popupsClosingScheduler.startPopupsCloserSchedule();
     }
 
     /**
@@ -45,6 +50,7 @@ public abstract class BaseTest {
      */
     @AfterMethod(alwaysRun = true)
     public void afterMethod() {
+        popupsClosingScheduler.shutdownPopupsCloserSchedule();
         DriverContainer.quit();
     }
 
