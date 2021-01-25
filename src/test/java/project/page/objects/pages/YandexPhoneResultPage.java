@@ -24,11 +24,12 @@ public class YandexPhoneResultPage extends BaseForm {
 
     private final SelenideElement sortingLine = wrap($x("//div[@data-apiary-widget-name='@MarketNode/SortPanel']"), "Меню выбора сортировки");
     private final SelenideElement priceTo = getMainElement().find(By.id("glpriceto"));
+    private final SelenideElement checkApple = wrap($x(".//li//span[contains(text(),'Apple')]"), "Фильтр производитель Apple");
+    private final SelenideElement checkHonor = wrap($x(".//li//span[contains(text(),'HONOR')]"), "Фильтр производитель HONOR");
+    private final SelenideElement checkHuawei = wrap($x("//li//span[contains(text(),'HUAWEI')]"), "Фильтр производитель HUAWEI");
     private final SelenideElement diagonal = wrap($x(".//input[@name='Диагональ экрана (точно) от']"), "Устанавливаем диоганаль 8");
-    private final SelenideElement checkApple = wrap($x(".//span[contains(text(),'Apple')]"), "Фильтр производитель Apple");
-    private final SelenideElement checkHonor = wrap($x(".//span[contains(text(),'HONOR')]"), "Фильтр производитель HONOR");
-    private final SelenideElement checkHuawei = wrap($x(".//span[contains(text(),'HUAWEI')]"), "Фильтр производитель HUAWEI");
-    private SelenideElement waitBtn = $x("//li[contains(text(),'оперативная память:')]");
+    private final SelenideElement btnNextSearch = wrap($x(".//a[@aria-label='Следующая страница']"), "Следующая страница поиска");
+    private final SelenideElement waitBtn = $x("//li[contains(text(),'оперативная память:')]");
 
     public void clickCheapestSorting() {
         sortingLine.$x(SORTING_PRICE).click();
@@ -44,7 +45,24 @@ public class YandexPhoneResultPage extends BaseForm {
         return $x(PHONE_SELECTOR);
     }
 
-    public String getPhonePrice(String phoneName) {
+    public void getPhonePrice(String phoneName) {
+        String price = "";
+        if (btnNextSearch.is(visible)) {
+            while (price.equals("")) {
+                price = getPhoneAndGetPrice(phoneName);
+                if (btnNextSearch.isDisplayed()) {
+                    btnNextSearch.click();
+                    waitBtn.click();
+                }
+            }
+            logger.info("Phone price= " + price);
+        } else {
+            waitBtn.click();
+            logger.info("Phone price= " + getPhoneAndGetPrice(phoneName));
+        }
+    }
+
+    private String getPhoneAndGetPrice(String phoneName) {
         String price = "";
         ElementsCollection results = $$x(PRODUCT_ARTICLE);
         for (SelenideElement el : results) {
@@ -53,16 +71,15 @@ public class YandexPhoneResultPage extends BaseForm {
             }
         }
 
-        logger.info("Phone price= " + price);
         return price;
     }
 
     public void setFilters() {
         priceTo.shouldBe(visible).sendKeys(PRICE_UPTO);
-        checkApple.click();
+        diagonal.sendKeys(DISPLAY_SIZE);
+        checkApple.scrollIntoView(true).click();
         checkHonor.click();
         checkHuawei.click();
-        diagonal.sendKeys(DISPLAY_SIZE);
         waitBtn.click();
     }
 }

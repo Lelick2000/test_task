@@ -8,9 +8,9 @@ import framework.base.BaseForm;
 
 import static aqa.framework.adaptor.element.SelenideElementWrapper.wrap;
 
-@PageInfo(xpath = "//div[@data-position='bottom']", pageName = "Search everywhere banner")
-public class SearchEverywhereModal extends BaseForm {
-    private final SelenideElement btnAccept = wrap(getMainElement().$x(".//span[contains(text(),'Понятно')]"), "Подтверждение поиска по всем магазинам");
+@PageInfo(xpath = "//div[@data-position='left']", pageName = "Buy directly on market modal")
+public class BuyDirectOnMarketModal extends BaseForm {
+    private final SelenideElement btnAccept = wrap(getMainElement().$x(".//span[contains(text(),'Понятно')]"), "Подтверждение покупки сразу на маркете");
 
     public void acceptBanner() {
         btnAccept.click();
@@ -20,7 +20,7 @@ public class SearchEverywhereModal extends BaseForm {
         return btnAccept.is(Condition.visible);
     }
 
-    public boolean isSearchEverywhereBannerDisplayed() {
+    public boolean isBuyBannerDisplayed() {
         return SmartSelenideElementWait.isElementInState(btnAccept, Condition.visible);
     }
 }

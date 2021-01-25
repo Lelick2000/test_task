@@ -50,8 +50,8 @@ public abstract class BaseTest {
      */
     @AfterMethod(alwaysRun = true)
     public void afterMethod() {
-        popupsClosingScheduler.shutdownPopupsCloserSchedule();
-        DriverContainer.quit();
+/*        popupsClosingScheduler.shutdownPopupsCloserSchedule();
+        DriverContainer.quit();*/
     }
 
 }

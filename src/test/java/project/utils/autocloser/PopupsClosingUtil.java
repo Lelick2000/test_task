@@ -3,12 +3,14 @@ package project.utils.autocloser;
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.WebDriver;
 import project.factories.PageFactory;
+import project.page.objects.modals.BuyDirectOnMarketModal;
 import project.page.objects.modals.SearchEverywhereModal;
 
 public class PopupsClosingUtil implements Runnable {
     private static final PageFactory pageFactory = PageFactory.getFactory();
 
     private final SearchEverywhereModal searchEverywhereModal = pageFactory.getInstance(SearchEverywhereModal.class);
+    private final BuyDirectOnMarketModal buyDirectOnMarketModal = pageFactory.getInstance(BuyDirectOnMarketModal.class);
 
     private final WebDriver webDriver;
 
@@ -36,9 +38,13 @@ public class PopupsClosingUtil implements Runnable {
     public void startModalClosers() {
         closeModalsAndPromotionsIfVisible();
     }
+
     public void closeModalsAndPromotionsIfVisible() {
         if (searchEverywhereModal.isAcceptBannerVisible()) {
             searchEverywhereModal.acceptBanner();
+        }
+        if (buyDirectOnMarketModal.isAcceptBannerVisible()) {
+            buyDirectOnMarketModal.acceptBanner();
         }
     }
 }
