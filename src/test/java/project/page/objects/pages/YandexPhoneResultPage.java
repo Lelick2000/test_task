@@ -24,8 +24,8 @@ public class YandexPhoneResultPage extends BaseForm {
 
     private final SelenideElement sortingLine = wrap($x("//div[@data-apiary-widget-name='@MarketNode/SortPanel']"), "Меню выбора сортировки");
     private final SelenideElement priceTo = getMainElement().find(By.id("glpriceto"));
-    private final SelenideElement checkApple = wrap($x(".//li//span[contains(text(),'Apple')]"), "Фильтр производитель Apple");
-    private final SelenideElement checkHonor = wrap($x(".//li//span[contains(text(),'HONOR')]"), "Фильтр производитель HONOR");
+    private final SelenideElement checkApple = wrap($x("//li//span[contains(text(),'Apple')]"), "Фильтр производитель Apple");
+    private final SelenideElement checkHonor = wrap($x("//li//span[contains(text(),'HONOR')]"), "Фильтр производитель HONOR");
     private final SelenideElement checkHuawei = wrap($x("//li//span[contains(text(),'HUAWEI')]"), "Фильтр производитель HUAWEI");
     private final SelenideElement diagonal = wrap($x(".//input[@name='Диагональ экрана (точно) от']"), "Устанавливаем диоганаль 8");
     private final SelenideElement btnNextSearch = wrap($x(".//a[@aria-label='Следующая страница']"), "Следующая страница поиска");

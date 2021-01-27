@@ -1,6 +1,5 @@
 package project.actions.steps;
 
-import aqa.framework.logger.Logger;
 import project.page.objects.menu.YandexMainServiceMenu;
 import project.page.objects.menu.YandexMarketMainMenu;
 import project.page.objects.pages.YandexCatalogPage;
@@ -12,8 +11,6 @@ public class MarketSteps extends BasePageSteps {
     private final YandexMarketMainMenu yandexMarketMain = pageFactory.getInstance(YandexMarketMainMenu.class);
     private final YandexCatalogPage yandexCatalogPage = pageFactory.getInstance(YandexCatalogPage.class);
     private final YandexPhoneResultPage yandexPhoneResultPage = pageFactory.getInstance(YandexPhoneResultPage.class);
-
-    private final Logger logger = Logger.getInstance();
 
     public void openMarketPage() {
         logger.step("Нажать на ссылку меню над поиском маркета");

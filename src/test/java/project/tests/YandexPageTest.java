@@ -41,6 +41,7 @@ public class YandexPageTest extends BaseTest {
         marketSteps.clickPopularitySort();
 
         logger.step(11, "Find the remembered item by name");
+        logger.step(12, "Print its price");
         marketSteps.findCheapestPhonePrice(phoneName);
     }
 }
